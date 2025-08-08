@@ -1,30 +1,24 @@
 var express = require('express');
 var router = express.Router();
 var SnippetController = require('../controllers/SnippetController.js');
+const {requireAuth, requireNotAuth} = require('../middleware/auth');
 
-/*
- * GET
- */
-router.get('/', SnippetController.list);
 
-/*
- * GET
- */
-router.get('/:id', SnippetController.show);
+router.get('/', requireAuth, SnippetController.list);
+router.get('/starred', requireAuth, SnippetController.listStarred);
+router.get('/explore', SnippetController.explore);
 
-/*
- * POST
- */
-router.post('/', SnippetController.create);
+router.get('/:id', requireAuth, SnippetController.show);
 
-/*
- * PUT
- */
-router.put('/:id', SnippetController.update);
 
-/*
- * DELETE
- */
-router.delete('/:id', SnippetController.remove);
+router.post('/add', requireAuth, SnippetController.create);
+router.post('/:id/star', requireAuth, SnippetController.star);
+router.post('/:id/unstar', requireAuth, SnippetController.unstar);
+
+
+router.put('/:id', requireAuth, SnippetController.update);
+
+
+router.delete('/:id', requireAuth, SnippetController.remove);
 
 module.exports = router;
