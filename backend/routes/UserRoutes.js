@@ -2,29 +2,21 @@ var express = require('express');
 var router = express.Router();
 var UserController = require('../controllers/UserController.js');
 
-/*
- * GET
- */
+const {requireAuth, requireNotAuth} = require('../middleware/auth');
+
 router.get('/', UserController.list);
+router.get('/show', requireAuth, UserController.showSelf);
 
-/*
- * GET
- */
-router.get('/:id', UserController.show);
+//router.get('/:id', UserController.show);
 
-/*
- * POST
- */
-router.post('/', UserController.create);
 
-/*
- * PUT
- */
+router.post('/register', requireNotAuth, UserController.registerSelf);
+router.post('/login', requireNotAuth, UserController.loginSelf);
+router.post('/logout', requireAuth, UserController.logoutSelf);
+
 router.put('/:id', UserController.update);
 
-/*
- * DELETE
- */
+
 router.delete('/:id', UserController.remove);
 
 module.exports = router;
