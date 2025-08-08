@@ -30,7 +30,7 @@ The project is designed as a **portfolio showcase** that demonstrates full-stack
 - [Express.js](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/)
 
-**Optional Integrations**
+**Bonus Integrations**
 - [OpenAI API](https://platform.openai.com/) – ChatGPT integration
 - [Prism.js](https://prismjs.com/) – Code syntax highlighting
 
