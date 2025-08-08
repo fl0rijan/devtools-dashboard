@@ -11,7 +11,9 @@ var PromptSchema = new Schema({
     'createdBy': {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    public: {type: Boolean, default: false},
+    starredBy: [{type: Schema.Types.ObjectId, ref: 'User'}]
 }, {timestamps: true});
 
 module.exports = mongoose.model('Prompt', PromptSchema);

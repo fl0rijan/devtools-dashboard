@@ -52,9 +52,9 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
-app.use('/prompt', promptRouter);
-app.use('/bookmark', bookmarkRouter);
-app.use('/snippet', snippetRouter);
+app.use('/prompts', promptRouter);
+app.use('/bookmarks', bookmarkRouter);
+app.use('/snippets', snippetRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

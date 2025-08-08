@@ -1,30 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var PromptController = require('../controllers/PromptController.js');
+const {requireAuth, requireNotAuth} = require('../middleware/auth');
 
-/*
- * GET
- */
-router.get('/', PromptController.list);
 
-/*
- * GET
- */
-router.get('/:id', PromptController.show);
+router.get('/', requireAuth, PromptController.list);
+router.get('/explore', PromptController.explore)
+router.get('/starred', requireAuth, PromptController.starred)
 
-/*
- * POST
- */
-router.post('/', PromptController.create);
+router.get('/:id', requireAuth, PromptController.show);
 
-/*
- * PUT
- */
-router.put('/:id', PromptController.update);
+router.post('/add', requireAuth, PromptController.create);
+router.post('/:id/star', requireAuth, PromptController.star);
+router.post('/:id/unstar', requireAuth, PromptController.unstar);
 
-/*
- * DELETE
- */
-router.delete('/:id', PromptController.remove);
+router.put('/:id', requireAuth, PromptController.update);
+
+
+router.delete('/:id', requireAuth, PromptController.remove);
 
 module.exports = router;
