@@ -1,8 +1,18 @@
+require('dotenv').config();
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
+
+
+var mongoose = require('mongoose');
+var mongoDB = process.env.MONGODB_URI;
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
