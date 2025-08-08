@@ -23,11 +23,29 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+var session = require('express-session');
+var MongoStore = require('connect-mongo');
+app.use(session({
+  secret: process.env.SECRET,
+  resave: true,
+  saveUninitialized: false,
+  store: MongoStore.create({mongoUrl: mongoDB}),
+  cookie: {
+    // secure: process.env.NODE_ENV === "production", // Use true if served over HTTPS
+    // sameSite: 'lax' // 'lax' is a good default, 'none' if cross-site with secure:true
+  }
+}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
