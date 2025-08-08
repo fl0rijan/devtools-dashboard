@@ -7,7 +7,16 @@ var BookmarkSchema = new Schema({
     'category': {type: String, default: 'General', trim: true},
     'tags': {type: [String], default: []},
     'description': {type: String, default: '', trim: true},
-    'createdAt': {type: Date, default: Date.now}
+    'createdBy': {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    public: {type: Boolean, default: false},
+    'createdAt': {type: Date, default: Date.now},
+    starredBy: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }],
 }, {timestamps: true});
 
 module.exports = mongoose.model('Bookmark', BookmarkSchema);

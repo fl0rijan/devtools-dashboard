@@ -2,29 +2,23 @@ var express = require('express');
 var router = express.Router();
 var BookmarkController = require('../controllers/BookmarkController.js');
 
-/*
- * GET
- */
-router.get('/', BookmarkController.list);
+const {requireAuth, requireNotAuth} = require('../middleware/auth');
 
-/*
- * GET
- */
-router.get('/:id', BookmarkController.show);
 
-/*
- * POST
- */
-router.post('/', BookmarkController.create);
+router.get('/', requireAuth, BookmarkController.list);
+router.get('/explore', BookmarkController.explore);
 
-/*
- * PUT
- */
-router.put('/:id', BookmarkController.update);
+router.get('/explore/:id', BookmarkController.exploreById);
+router.get('/:id', requireAuth, BookmarkController.show);
 
-/*
- * DELETE
- */
-router.delete('/:id', BookmarkController.remove);
+
+router.post('/add', requireAuth, BookmarkController.create);
+router.post('/:id/star', requireAuth, BookmarkController.star);
+router.post('/:id/unstar', requireAuth, BookmarkController.unstar);
+
+router.put('/:id/update', requireAuth, BookmarkController.update);
+
+
+router.delete('/:id/remove', requireAuth, BookmarkController.remove);
 
 module.exports = router;
