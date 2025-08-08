@@ -2,7 +2,7 @@
 
 A personal web application for developers to organize their favorite tools, AI prompts, code snippets, and documentation — all in one place.
 
-The project is designed as a **portfolio showcase** that demonstrates full-stack development skills, database integration, and optional AI functionality with the ChatGPT API.
+The project is designed as a **portfolio showcase** that demonstrates full-stack development skills, database integration, and AI functionality with the ChatGPT API.
 
 ---
 
@@ -14,7 +14,7 @@ The project is designed as a **portfolio showcase** that demonstrates full-stack
 - 🔍 **Search & Filter** – Quickly find prompts, links, and snippets  
 - 🌙 **Dark/Light Mode** – Clean UI with theme switching  
 - 🧑‍💻 **Optional User Login** – Multi-user support with authentication  
-- 🤖 **AI Chat Integration** – (Optional) Chat with ChatGPT directly in the dashboard
+- 🤖 **AI Chat Integration** – Chat with ChatGPT directly in the dashboard
 
 ---
 
@@ -28,7 +28,7 @@ The project is designed as a **portfolio showcase** that demonstrates full-stack
 **Backend**
 - [Node.js](https://nodejs.org/)
 - [Express.js](https://expressjs.com/)
-- [MongoDB](https://www.mongodb.com/) (or SQLite for simplicity)
+- [MongoDB](https://www.mongodb.com/)
 
 **Optional Integrations**
 - [OpenAI API](https://platform.openai.com/) – ChatGPT integration
