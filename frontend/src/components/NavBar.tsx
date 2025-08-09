@@ -44,7 +44,7 @@ export default function NavBar() {
     }
 
     return (
-        <nav className="bg-white shadow-md sticky top-0 z-50 py-4 px-6">
+        <nav className="bg-white/25 shadow-md top-0 z-50 py-4 px-6 backdrop-blur-sm sticky">
             <div className="max-w-7xl mx-auto flex justify-between items-center h-16">
                 <div className="flex items-center space-x-10">
                     <Link to="/"
