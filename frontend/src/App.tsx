@@ -11,6 +11,7 @@ import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                     />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
+                <Footer />
             </BrowserRouter>
         </AuthProvider>
     );
