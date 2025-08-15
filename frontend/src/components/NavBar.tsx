@@ -1,43 +1,41 @@
 import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-//import {useAuth} from '../context/AuthContext';
+import {useAuth} from '../context/AuthContext';
 import ProfileMenu from './ProfileMenu';
 import {LoginDropdown} from './LoginDropdown'
 import {RegisterDropdown} from './RegisterDropdown'
+import {toast} from 'react-toastify';
 
 export default function NavBar() {
-    //const {user, logout} = useAuth();
-    //const navigate = useNavigate();
-    //const [mobileOpen, setMobileOpen] = useState(false);
-
-    const [user, setUser] = useState<{ username: string; email: string } | null>(null);
+    const {user, login, logout, register} = useAuth();
     const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = useState(false);
 
-    function handleLogout() {
-        setUser(null);
-        navigate('/');
-    }
-
-    function handleLogin(email: string, password: string) {
-        console.log('Login:', email, password);
-        setUser({username: email.split('@')[0], email});
-    }
-
-    /*
     function handleLogout() {
         logout();
         navigate('/');
     }
 
-    function handleLogin(email: string, password: string) {
-        console.log('Login:', email, password)
-    }
-*/
-    function handleRegister(email: string, password: string, username: string) {
-        console.log('Register:', email, password, username)
+    async function handleLogin(username: string, password: string) {
+        try {
+            const response = await login(username, password);
+            toast.success(response.message || 'Login successful!');
+            navigate('/library');
+        } catch (err: any) {
+            const msg = err.response?.data?.message || 'Login failed!';
+            toast.error(msg);
+        }
     }
 
+    async function handleRegister(email: string, username: string, password: string) {
+        try {
+            const response = await register(email, username, password);
+            toast.success(response.message || 'Registration successful!');
+        } catch (err: any) {
+            const msg = err.response?.data?.message || 'Registration failed!';
+            toast.error(msg);
+        }
+    }
 
     function toggleMobileMenu() {
         setMobileOpen(!mobileOpen);

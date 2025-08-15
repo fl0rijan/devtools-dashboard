@@ -4,7 +4,7 @@ var UserController = require('../controllers/UserController.js');
 
 const {requireAuth, requireNotAuth} = require('../middleware/auth');
 
-router.get('/', UserController.list);
+router.get('/', UserController.checkAuth);
 router.get('/show', requireAuth, UserController.showSelf);
 
 //router.get('/:id', UserController.show);

@@ -10,7 +10,7 @@ export default function Login() {
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         if (!username.trim()) return;
-        login(username.trim());
+        login(username.trim(), "tesd");
         navigate('/library');
     }
 

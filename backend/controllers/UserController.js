@@ -137,7 +137,10 @@ module.exports = {
 
         } catch (err) {
             console.error(err);
-            if (err.code === 11000) {
+            if (err.name === 'ValidationError') {
+                const messages = Object.values(err.errors).map(e => e.message);
+                return res.status(400).json({message: messages.join(', ')});
+            } else if (err.code === 11000) {
                 if (err.keyPattern && err.keyPattern.username) {
                     return res.status(400).json({message: 'Username already exists'});
                 } else if (err.keyPattern && err.keyPattern.email) {
@@ -146,6 +149,7 @@ module.exports = {
                     return res.status(400).json({message: 'Duplicate key error'});
                 }
             }
+
             return res.status(500).json({
                 message: 'Error registering user',
                 error: err.message
@@ -187,5 +191,35 @@ module.exports = {
         } catch (err) {
             return next(err);
         }
+    },
+
+    checkAuth: async function (req, res) {
+        try {
+            console.log('Checking session userId:', req.session.userId);
+
+            if (req.session && req.session.userId) {
+                const user = await UserModel.findById(req.session.userId).exec();
+
+                if (!user) {
+                    return res.status(404).json({message: 'User not found'});
+                }
+
+                const safeUser = {
+                    _id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    createdAt: user.createdAt,
+                    updatedAt: user.updatedAt
+                };
+
+                return res.json({isAuthenticated: true, user: safeUser});
+            } else {
+                return res.json({isAuthenticated: false});
+            }
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({message: 'Server error'});
+        }
     }
+
 };

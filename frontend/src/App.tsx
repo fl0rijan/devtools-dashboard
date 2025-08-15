@@ -13,6 +13,9 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
     return (
         <AuthProvider>
@@ -33,6 +36,7 @@ function App() {
                     />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
+                <ToastContainer position="top-right" autoClose={3000} />
                 <Footer />
             </BrowserRouter>
         </AuthProvider>

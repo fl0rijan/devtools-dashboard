@@ -12,7 +12,7 @@ export function RegisterDropdown({ onRegister }: RegisterDropdownProps) {
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        onRegister(email, password, username);
+        onRegister(email, username, password);
     }
 
     return (
@@ -43,7 +43,7 @@ export function RegisterDropdown({ onRegister }: RegisterDropdownProps) {
                         </label>
                         <input
                             id="register-email"
-                            type="email"
+                            type="text"
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
